@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Funds - BG Wealth</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'broker/deposit.css' %}">
+</head>
+
+
+<body>
+
+    <style>
+        .alert-success {
+            background: green;
+            color: white;
+            border: 1px solid rgba(157, 180, 157, 0.25);
+            border-radius: 14px;
+            text-align: center;
+            padding: 1px 20px;
+            position: relative;
+            bottom: 7px;
+            box-shadow: 2px 2px 0px #f1f1f1, -2px -2px 0px #ffffff;
+        }
+    </style>
+
+    <div class="deposit-container">
+        <div class="deposit-header">
+            <h1>Deposit Funds</h1>
+            <p>Choose your preferred deposit method to add funds to your account</p>
+        </div>
+
+
+        <div class="deposit-methods">
+            <!-- Hidden radio buttons for tab switching -->
+            <input type="radio" id="crypto-tab" name="deposit-method" value="crypto" checked hidden>
+            <input type="radio" id="bank-tab" name="deposit-method" value="bank" hidden>
+
+            <!-- Tab Navigation -->
+            <div class="tabs-container">
+                <label for="crypto-tab" class="tab-label crypto-label">
+                    <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 6v12M9 9h6a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-6a2 2 0 0 0-2-2v-2a2 2 0 0 1 2-2z">
+                        </path>
+                    </svg>
+                    <span>Cryptocurrency</span>
+                </label>
+                <label for="bank-tab" class="tab-label bank-label">
+                    <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 11h18M3 11v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M3 11L12 4l9 7M9 15v2M15 15v2"></path>
+                    </svg>
+                    <span>Bank Transfer</span>
+                </label>
+            </div>
+
+            <!-- Cryptocurrency Deposit Form -->
+            <div class="deposit-form crypto-form">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if messages %}
+
+                    <div class="alert alert-success" role="alert">
+                        {% for message in messages %}
+
+                        <h4 class="alert{{message.tags}}">{{ message }}</h4>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="crypto_amount">Deposit Amount <span class="required">*</span></label>
+                        <div class="input-with-currency">
+                            <input type="number" name="crypto_amount" placeholder="0.00" required>
+                            <select id="crypto_type" name="crypto_type" required>
+                                <option value="">Select Cryptocurrency</option>
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="USDT">Tether (USDT)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Wallet Addresses <span class="required">*</span></label>
+                        <div class="info-box">
+                            <p>Send funds to the appropriate wallet address based on your selected cryptocurrency. Make
+                                sure to send the exact amount in the selected cryptocurrency.</p>
+                        </div>
+                        <div class="wallet-addresses-grid">
+                            {% for address in address %}
+                            {% if address.crypto_type == 'BTC' %}
+                            <div class="wallet-address-card">
+                                <div class="wallet-header">
+                                    <span class="crypto-label">Bitcoin (BTC)</span>
+                                    <span class="crypto-icon">₿</span>
+                                </div>
+                                <div class="wallet-address-box">
+                                    <input type="text" id="btc_address" name="btc_address" readonly
+                                        value="{{address.wallet_address}}" class="wallet-address-input">
+                                    <button type="button" class="copy-btn" onclick="copyWalletAddress('btc_address')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                            </path>
+                                            <rect x="8" y="2" width="8" height="4" rx="1"></rect>
+                                        </svg>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            {% elif address.crypto_type == 'USDT' %}
+                            <div class="wallet-address-card">
+                                <div class="wallet-header">
+                                    <span class="crypto-label">Tether (USDT)</span>
+                                    <span class="crypto-icon">₮</span>
+                                </div>
+                                <div class="wallet-address-box">
+                                    <input type="text" id="usdt_address" name="usdt_address" readonly
+                                        value="{{address.wallet_address}}" class="wallet-address-input">
+                                    <button type="button" class="copy-btn" onclick="copyWalletAddress('usdt_address')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                            </path>
+                                            <rect x="8" y="2" width="8" height="4" rx="1"></rect>
+                                        </svg>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="crypto_proof">Payment Proof <span class="required">*</span></label>
+                        <p class="helper-text">Upload a screenshot or proof of your transaction</p>
+                        <div class="file-upload">
+                            <input type="file" id="crypto_proof" name="proof" accept="image/*" required>
+                            <div class="file-upload-content">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                <p>Click to upload or drag and drop</p>
+                                <span>PNG, JPG up to 10MB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" name="deposit_crypto">Deposit Crypto</button>
+                </form>
+            </div>
+
+            <!-- Bank Transfer Deposit Form -->
+            <div class="deposit-form bank-form">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="bank_amount">Deposit Amount <span class="required">*</span></label>
+                        <div class="input-with-currency">
+                            <input type="number" id="bank_amount" name="amount" placeholder="0.00" min="0" step="0.01"
+                                required>
+                            <select id="bank_currency" name="bank_currency" required>
+                                <option value="">Select Currency</option>
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="PHP">PHP - Philippine Peso</option>
+                                <option value="INR">INR - Indian Rupee</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bank Account Details</label>
+                        <div class="bank-details">
+                            <div class="detail-item">
+                                {% for bank in bank %}
+
+
+                                <span class="detail-label">Account Holder</span>
+                                <span class="detail-value">{{bank.accounts_name}}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Bank Name</span>
+                                <span class="detail-value">{{bank.bank_name}}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Account Number</span>
+                                <span class="detail-value">{{bank.account_number}}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">SWIFT Code</span>
+                                <span class="detail-value">{{bank.swift_code}}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Routing Number</span>
+                                <span class="detail-value">{{bank.routing_number}}</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank_proof">Payment Proof <span class="required">*</span></label>
+                        <p class="helper-text">Upload a screenshot of your bank transfer confirmation</p>
+                        <div class="file-upload">
+                            <input type="file" id="bank_proof" name="proof" accept="image/*" required>
+                            <div class="file-upload-content">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                <p>Click to upload or drag and drop</p>
+                                <span>PNG, JPG up to 10MB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box warning">
+                        <strong>Important:</strong> {{bank.important_note}}
+                    </div>
+                    {% endfor %}
+                    <button type="submit" name="send_funds" class="submit-btn">Deposit Funds</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyWalletAddress(elementId) {
+            const walletAddress = document.getElementById(elementId);
+            const copyBtn = event.target.closest('.copy-btn');
+
+            if (!walletAddress.value) {
+                alert('No wallet address to copy');
+                return;
+            }
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(walletAddress.value).then(() => {
+                // Show success feedback
+                const originalHTML = copyBtn.innerHTML;
+                const copyText = copyBtn.querySelector('.copy-text');
+
+                copyText.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyText.textContent = 'Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy. Please try again.');
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+</body>
+
+
+</html>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>BG Wealth Email</title>
+</head>
+
+<body style="margin: 0; padding: 0; background-color: #eef4ff;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #eef4ff;">
+        <tr>
+            <td align="center" style="padding: 40px 20px;">
+                <table width="600" border="0" cellspacing="0" cellpadding="0"
+                    style="background-color: #ffffff; border-radius: 24px;">
+                    <tr>
+                        <td style="padding: 40px; text-align: center;">
+                            <div
+                                style="width: 60px; height: 60px; border-radius: 18px; background: linear-gradient(135deg, #2f6cff, #63a3ff); margin: 0 auto 16px; text-align: center; line-height: 60px; font-size: 24px; font-weight: bold; color: #ffffff;">
+                                B</div>
+                            <h1 style="margin: 0; font-size: 24px; font-weight: bold; color: #0f2d7a;">BG Wealth</h1>
+                            <p style="margin: 4px 0 0 0; color: #5b6b8c; font-size: 14px;">Trading Platform</p>
+                            <h2 style="margin: 24px 0 16px 0; font-size: 28px; font-weight: bold; color: #0f2d7a;">
+
+                                {{subject}}</h2>
+                            <p style="margin: 0 0 24px 0; color: #5b6b8c; font-size: 16px;">{{ greeting }}
+                                {{username}}</p>
+                            <div style="color: #091e52; font-size: 18px; line-height: 1.6; margin-bottom: 32px;">
+                                {{content}}
+                            </div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="padding-bottom: 32px;">
+                                        <table border="0" cellspacing="0" cellpadding="0" align="center">
+                                            <tr>
+                                                <td
+                                                    style="background: #2f6cff; border-radius: 25px; padding: 16px 32px;">
+                                                    <a href="{{ url }}"
+                                                        style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 16px;">{{ url }}</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="border-top: 1px solid #e1e5e9; padding-top: 24px; margin-top: 24px;">
+                                <p style="margin: 0 0 16px 0; color: #5b6b8c; font-size: 14px;">
+                                    If you have any questions, contact our support team.
+                                </p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="center">
+                                            <a href="{{ protocol }}://{{ domain }}{% url 'support' %}"
+                                                style="color: #2f6cff; text-decoration: none; font-weight: 600; font-size: 14px; margin: 0 12px;">Contact
+                                                Support</a>
+                                            <a href="{{ domain }}{% url 'dashboard' %}"
+                                                style="color: #2f6cff; text-decoration: none; font-weight: 600; font-size: 14px; margin: 0 12px;">View
+                                                Dashboard</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 24px 40px; background: #f8f9fa; border-radius: 0 0 24px 24px;">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="color: #5b6b8c; font-size: 12px;">
+                                        <p style="margin: 0 0 8px 0;">© 2026 BG Wealth. All rights reserved.</p>
+                                        <p style="margin: 0;">
+                                            <a href="{{ protocol }}://{{ domain }}{% url 'about' %}"
+                                                style="color: #2f6cff; text-decoration: none; margin: 0 8px;">Privacy
+                                                Policy</a> |
+                                            <a href="{{ protocol }}://{{ domain }}{% url 'about' %}"
+                                                style="color: #2f6cff; text-decoration: none; margin: 0 8px;">Terms of
+                                                Service</a> |
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

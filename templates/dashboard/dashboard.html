@@ -1,0 +1,173 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard | BG WEALTH</title>
+    <link rel="stylesheet" href="{% static 'broker/dashboard.css' %}">
+</head>
+
+<body>
+    <div class="support-container">
+    <!-- Header -->
+    <header class="top-nav">
+        <div class="brand">
+            <span class="brand-mark">Hi</span>
+            <div>
+                <p class="brand-title">{{user.username}}</p>
+                <p class="brand-tag">Trading Smarter Earn Smarter </p>
+            </div>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav-links" id="navLinks">
+            <a href="/deposit">Deposit</a>
+            <a href="/menu">Menu</a>
+            <a href="/withdraw" class="primary-action">Withdraw Funds</a>
+        </nav>
+    </header>
+
+
+        <section class="hero-panel" id="overview">
+            <div class="hero-copy">
+                <p class="eyebrow">Account snapshot</p>
+                <h1>Real trading balances in one clean view</h1>
+                <p>This dashboard shows the exact fund positions every trader needs: deposit, bonus, available balance,
+                    profit, and withdrawal balance.</p>
+                <div class="hero-buttons">
+                    <a href="#balances" class="primary-action">View balances</a>
+                    <a href="#activity">Recent activity</a>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <strong>$20.1k</strong>
+                        <span>Total equity</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>+2.8%</strong>
+                        <span>Today’s movement</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>Live</strong>
+                        <span>Market updates</span>
+                    </div>
+                </div>
+            </div>
+            <div class="balance-grid" id="balances">
+                <div class="balance-card">
+                    <strong>{{currency.currency}}{{data.initial | intcomma}}</strong>
+                    <span>Initial deposit balance</span>
+                </div>
+
+                <div class="balance-card">
+                    <strong>{{currency}}{{data.welcome | intcomma}}</strong>
+                    <span>Welcome bonus balance</span>
+                </div>
+
+                <div class="balance-card">
+                    <strong>{{currency}}{{data.avaliable | intcomma}}</strong>
+                    <span>Available balance</span>
+                </div>
+
+                <div class="balance-card">
+
+                    <strong>{{currency}}{{data.profit | intcomma}}</strong>
+                    <span>Profit</span>
+                </div>
+                <div class="balance-card">
+
+                    <strong>{{currency}}{{data.withdrawal | intcomma}}</strong>
+                    <span>Withdrawal balance</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-panel">
+            <article class="panel-card" id="charts">
+                <h2>Trading overview</h2>
+                <p class="panel-copy">Clean market view with crisp analytics and a simple chart preview for active
+                    positions.</p>
+                <div class="trading-stats">
+                    <div class="trading-stat">
+                        <strong>12.4%</strong>
+                        <span>Portfolio return</span>
+                    </div>
+                    <div class="trading-stat">
+                        <strong>6.3%</strong>
+                        <span>Risk exposure</span>
+                    </div>
+                    <div class="trading-stat">
+                        <strong>8.2%</strong>
+                        <span>Win rate</span>
+                    </div>
+                    <div class="trading-stat">
+                        <strong>2.1x</strong>
+                        <span>Margin ratio</span>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="sparkline">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Smartsupp Live Chat script -->
+            <script type="text/javascript">
+                var _smartsupp = _smartsupp || {};
+                _smartsupp.key = '69a8f9f57c3d64406da7cb58507a6064dad5a17d';
+
+                
+
+                window.smartsupp || (function (d) {
+                    var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
+                    s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
+                    c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+                    c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
+                })(document);
+            </script>
+            <noscript>Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a></noscript>
+
+
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.top-nav')) {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+</script>
+
+</body>
+
+</html>

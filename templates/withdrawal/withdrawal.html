@@ -1,0 +1,216 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Funds | BG WEALTH</title>
+    <link rel="stylesheet" href="{% static 'broker/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'broker//withdrawal.css' %}">
+</head>
+
+<body>
+    <div class="support-container">
+        <!-- Header -->
+        <header class="top-nav">
+            <div class="brand">
+                <span class="brand-mark">B</span>
+                <div>
+                    <p class="brand-title">Bg Wealth</p>
+                    <p class="brand-tag">Withdraw Funds</p>
+                </div>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="/dashboard">Deposit</a>
+                <a href="/menu">Menu</a>
+                <a href="/dashboard" class="primary-action">Dashboard</a>
+            </nav>
+        </header>
+
+
+        {% if messages %}
+
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+
+            <h4 class="alert{{message.tags}}">{{ message }}</h4>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <style>
+            .alert-success {
+                background: #dc1145;
+                color: white;
+                border: 1px solid rgba(212, 0, 0, 0.25);
+                border-radius: 14px;
+                text-align: center;
+                padding: 1px;
+                position: relative;
+                top: 35px;
+                box-shadow: 2px 2px 0px #f1f1f1, -2px -2px 0px #ffffff;
+            }
+        </style>
+
+        <section class="hero-panel">
+            <div class="hero-copy">
+                <p class="eyebrow">Withdrawal request</p>
+                <h1>Withdraw your funds fast and securely</h1>
+
+
+                <p>Submit a clean withdrawal request using the same familiar trading dashboard style. Your request will
+                    be reviewed and processed quickly.</p>
+                <div class="hero-buttons">
+                    <a href="/dashboard" class="primary-action">Back to dashboard</a>
+                    <a href="/deposit">Make a deposit</a>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+
+                        <strong>{{currency}}{{data.avaliable|intcomma}}</strong>
+                        <span>Available balance</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>{{currency}}{{data.pending_withdrawal | intcomma}}</strong>
+                        <span>Pending withdrawal</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>Live</strong>
+                        <span>Support access</span>
+                    </div>
+                </div>
+            </div>
+            <div class="balance-grid">
+                <div class="balance-card">
+                    <strong>{{currency}}{{data.withdrawal|intcomma}}</strong>
+                    <span>Ready to withdraw</span>
+                </div>
+                <div class="balance-card">
+                    <strong>{{currency}}0.00</strong>
+                    <span>Last withdrawal</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-panel">
+            <article class="panel-card">
+                <h2>Withdrawal form</h2>
+                <p class="panel-copy">Fill in the withdrawal details below and submit your request. We recommend
+                    verifying your account details before sending.</p>
+                <form method="POST" enctype="multipart/form-data" class="withdraw-form">
+                    {% csrf_token %}
+                    <div class="withdraw-row">
+                        <div class="withdraw-field">
+                            <label for="withdraw_amount">Amount</label>
+                            <input type="number" id="withdraw_amount" name="withdrawal_amount" placeholder="0.00"
+                                step="0.01" required>
+                        </div>
+                        <div class="withdraw-field">
+                            <label for="withdraw_currency">Currency</label>
+                            <select id="withdraw_currency" name="withdrawal_currency" required>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="PHP">PHP</option>
+                                <option value="INR">INR</option>
+                                <option value="USDT">USDT</option>
+                                <option value="BTC">BTC</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="withdraw-row">
+                        <div class="withdraw-field full-width">
+                            <label for="withdraw_method">Withdrawal Method</label>
+                            <select id="withdraw_method" name="withdrawal_method" required>
+                                <option value="bank">Bank Transfer</option>
+                                <option value="usdt">USDT Tether</option>
+                                <option value="btc">Bitcoin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="withdraw-row">
+                        <div class="withdraw-field full-width">
+                            <label for="destination_account">Destination Account / Wallet</label>
+                            <input type="text" id="destination_account" name="destination_account"
+                                placeholder="Enter bank account or wallet address" required>
+                        </div>
+                    </div>
+
+                    <div class="withdraw-row">
+                        <div class="withdraw-field full-width">
+                            <label for="account_name">Enter Account Name (Optional for Crypto Withdrawals)</label>
+                            <input type="text" id="account_name" name="account_name" placeholder="Enter account name">
+                        </div>
+                    </div>
+
+                    <div class="withdraw-row">
+                        <div class="withdraw-field full-width">
+                            <label for="bank_name">Enter Bank Name (Optional for Crypto Withdrawals)</label>
+                            <input type="text" id="bank_name" name="bank_name" placeholder="Enter bank name">
+                        </div>
+                    </div>
+
+
+                    <div class="withdraw-row">
+                        <div class="withdraw-field full-width">
+                            <label for="withdraw_proof">Proof of identity or bank transfer (Optional)</label>
+                            <p class="client-copy">Upload your receipt or authorization document as needed.</p>
+                            <div class="file-upload">
+                                <input type="file" id="withdraw_proof" name="withdraw_proof" accept="image/*">
+                                <div class="file-upload-content">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    <p>Click to upload or drag and drop</p>
+                                    <span>PNG, JPG up to 10MB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-action">Submit Withdrawal</button>
+                </form>
+            </article>
+        </section>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.top-nav')) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+    <link rel="stylesheet" href="/static/broker/form.css">
+</head>
+
+<body>
+
+    <style>
+        .alert-success {
+            background: green;
+            color: white;
+            border: 1px solid rgba(157, 180, 157, 0.25);
+            border-radius: 14px;
+            text-align: center;
+            padding: 1px 20px;
+            position: relative;
+            bottom: 7px;
+            box-shadow: 2px 2px 0px #f1f1f1, -2px -2px 0px #ffffff;
+        }
+    </style>
+
+    <div class="form-container">
+        <h1>Form Page</h1>
+        <form method="post">
+
+            {% csrf_token %}
+                
+                {% if messages %}
+                
+                <div class="alert alert-success" role="alert">
+                    {% for message in messages %}
+                
+                    <h4 class="alert{{message.tags}}">{{ message }}</h4>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+        <div class="option">
+            <label for="user">Select User:</label>
+                
+            <select name="user" id="user" required>
+                <option value="">Select User</option>
+        
+                {% for user in users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+        </select>
+    </div>
+
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject">
+            </div>
+            <div class="form-group">
+                <label for="greeting">Greeting:</label>
+                <input type="text" id="greeting" name="greeting">
+            </div>
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="url" id="url" name="url">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

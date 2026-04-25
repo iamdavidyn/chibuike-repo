@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG WEALTH</title>
+    <link rel="stylesheet" href="{% static 'broker/home.css' %}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header class="nav-bar">
+            <div class="brand">
+                <span class="brand-mark">B</span>
+                <div>
+                    <div class="brand-title">Bg Wealth</div>
+                    <div class="brand-tag">Trade Smarter Grow Smarter</div>
+                </div>
+            </div>
+            <nav class="navigation">
+                <a href="/login">Login</a>
+                <a href="/about">About Us</a>
+                <a href="/signup" class="button-link">Get Started</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-copy">
+                    <p class="eyebrow">Join And Also Become A Professional Trader </p>
+                    <h1>Modern trading for serious investors.</h1>
+                    <p>Our goal is to help individuals and businesses grow their wealth through strategic trading market
+                        insight, and disciplined risk management. </p>
+                    <div class="hero-cta">
+                        <a href="#dashboard" class="button button-primary">View trading demo</a>
+                        <a href="#insights" class="button button-secondary">See market insights</a>
+                    </div>
+                    <div class="trust-row">
+                        <div>
+                            <strong>20M+</strong>
+                            <span>daily quotes</span>
+                        </div>
+                        <div>
+                            <strong>{{active}}</strong>
+                            <span>active traders</span>
+                        </div>
+                        <div>
+                            <strong>99.9%</strong>
+                            <span>data reliability</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="trading-panel">
+                        <div class="panel-header">
+                            <div>
+                                <span class="symbol">BRCX</span>
+                                <span class="symbol-name">Broker Exchange</span>
+                            </div>
+                            <div class="ticker-state positive">+2.32%</div>
+                        </div>
+                        <div class="chart-preview">
+                            <div class="trend-line"></div>
+                            <div class="trend-line trend-line--accent"></div>
+                            <div class="chart-grid"></div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="price-block">
+                                <span class="label">Latest</span>
+                                <strong>$317.42</strong>
+                            </div>
+                            <div class="price-block">
+                                <span class="label">Volume</span>
+                                <strong>1.2M</strong>
+                            </div>
+                            <div class="price-block">
+                                <span class="label">Spread</span>
+                                <strong>0.08%</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dashboard" class="section section-dashboard">
+                <div class="section-heading">
+                    <p class="eyebrow">Trading view</p>
+                    <h2>Professional layout built for clarity.</h2>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="card card-market">
+                        <div class="card-title">Market Snapshot</div>
+                        <div class="market-grid">
+                            <div class="market-item active">
+                                <span>FX</span>
+                                <strong>EUR/USD</strong>
+                            </div>
+                            <div class="market-item">
+                                <span>Equities</span>
+                                <strong>SP500</strong>
+                            </div>
+                            <div class="market-item">
+                                <span>Commodities</span>
+                                <strong>Gold</strong>
+                            </div>
+                            <div class="market-item">
+                                <span>Crypto</span>
+                                <strong>BTC</strong>
+                            </div>
+                        </div>
+                        <div class="mini-chart">
+                            <span style="--bar: 82%"></span>
+                            <span style="--bar: 63%"></span>
+                            <span style="--bar: 77%"></span>
+                            <span style="--bar: 55%"></span>
+                            <span style="--bar: 90%"></span>
+                        </div>
+                    </div>
+                    <div class="card card-orders">
+                        <div class="card-title">Today’s orders</div>
+                        <div class="order-list">
+                            <div>
+                                <span>Buy</span>
+                                <strong>38.3K</strong>
+                            </div>
+                            <div>
+                                <span>Sell</span>
+                                <strong>26.9K</strong>
+                            </div>
+                            <div>
+                                <span>Pending</span>
+                                <strong>567</strong>
+                            </div>
+                        </div>
+                        <div class="order-bars">
+                            <div><span style="--value: 75%"></span><strong>Buy</strong></div>
+                            <div><span style="--value: 45%"></span><strong>Sell</strong></div>
+                            <div><span style="--value: 15%"></span><strong>Pending</strong></div>
+                        </div>
+                    </div>
+                    <div class="card card-watchlist">
+                        <div class="card-title">Watchlist</div>
+                        <ul>
+                            <li>ALP • <strong>+1.84%</strong></li>
+                            <li>ORA • <strong>-0.62%</strong></li>
+                            <li>AXP • <strong>+3.97%</strong></li>
+                            <li>QDT • <strong>+0.45%</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="insights" class="section section-insights">
+                <div class="insights-card">
+                    <div>
+                        <p class="eyebrow">Insights</p>
+                        <h2>Actionable data you can trust.</h2>
+                        <p> Access global markets with advance tools, real time insights, and ay platform buil for
+                            success</p>
+                    </div>
+                    <div class="insight-grid">
+                        <div class="insight-box">
+                            <strong>93%</strong>
+                            <span>signal accuracy</span>
+                        </div>
+                        <div class="insight-box">
+                            <strong>{{afl}}ms</strong>
+                            <span>average feed latency</span>
+                        </div>
+                        <div class="insight-box">
+                            <strong>8</strong>
+                            <span>custom watchlists</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="demo" class="section section-contact">
+                <div class="contact-panel">
+                    <div>
+                        <p class="eyebrow">Get started</p>
+                        <h2>Take the first step toward smarter trading and better opportunities.</h2>
+                        <p>Professional design, fast updates, and a layout built to help visitors understand the
+                            platform immediately.</p>
+                    </div>
+                    <a href="/signup" class="button button-primary">Get Started</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

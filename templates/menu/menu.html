@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | BG WEALTH</title>
+    <link rel="stylesheet" href="{% static 'broker/menu.css' %}">
+</head>
+
+<body>
+    <div class="menu-shell">
+        <header class="top-nav">
+            <div class="brand">
+                <span class="brand-mark">Hi</span>
+                <div>
+                    <p class="brand-title">{{ user.username }}</p>
+                    <p class="brand-tag">Trading platform</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="menu-content">
+            <div class="menu-header">
+                <h1>Main Menu</h1>
+                <p>Access all your trading features</p>
+            </div>
+
+            <div class="menu-grid">
+                <a href="/dashboard" class="menu-card">
+                    <div class="menu-icon">🏠</div>
+                    <h3>Dashboard</h3>
+                    <p>View your account overview and balances</p>
+                </a>
+
+                <a href="/deposit" class="menu-card">
+                    <div class="menu-icon">💰</div>
+                    <h3>Deposit</h3>
+                    <p>Add funds to your trading account</p>
+                </a>
+
+                <a href="/withdraw" class="menu-card">
+                    <div class="menu-icon">💸</div>
+                    <h3>Withdraw</h3>
+                    <p>Request withdrawal of your funds</p>
+                </a>
+
+                <a href="/about" class="menu-card">
+                    <div class="menu-icon">📊</div>
+                    <h3>Activity</h3>
+                    <p>View your trading history and transactions</p>
+                </a>
+
+                <a href="/logout" class="menu-card">
+                    <div class="menu-icon">🚪</div>
+                    <h3>Log Out</h3>
+                    <p>Log out your account </p>
+                </a>
+
+                <a href="/support" class="menu-card">
+                    <div class="menu-icon">🆘</div>
+                    <h3>Support</h3>
+                    <p>Get help and contact support</p>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

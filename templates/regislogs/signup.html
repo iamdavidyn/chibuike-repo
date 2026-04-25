@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | BG WEALTH</title>
+    <link rel="stylesheet" href="{% static 'broker/signup.css' %}">
+</head>
+
+<body>
+    <div class="signup-page">
+        <div class="signup-card">
+            <div class="signup-intro">
+                <div class="brand">
+                    <span class="brand-mark">B</span>
+                    <div>
+                        <div class="brand-title">Bg Wealth</div>
+                        <div class="brand-tag">Trade Smarter Grow Smarter</div>
+                    </div>
+                </div>
+                <h1>Create your account</h1>
+                <p>Sign up with your full name, email, and phone number to start your trading journey.</p>
+            </div>
+            <form class="signup-form" method="post">
+                {% csrf_token %}
+                
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+
+                <div class="form-group">
+                    <label for="full-name">Full name</label>
+                    <input id="full-name" name="first_name" type="text" placeholder="Jane Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Username</label>
+                    <input id="full-name" name="username" type="username" placeholder="janedoe" style="margin-bottom: 15px;" required>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        {% for message in messages %}
+                            <div class="message error">{{ message }}</div>
+                        {% endfor %}
+                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password" minlength="6" placeholder="Create a password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="Confirm password">Confirm Password</label>
+                        <input id="confirm" name="confirm" type="password" placeholder="Confirm your password" required minlength="6">
+                    </div>
+                    <button type="submit" class="button-submit">Create Account</button>
+                    <p class="signin-note">Already have an account? <a href="/login">Login here</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
