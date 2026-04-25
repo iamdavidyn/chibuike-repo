@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q6m!)m1x68uj6@q5fm#nw!j-jgg$t$opt#a#j22a_-gyqu55x_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [ 'https://website-broker.onrender.com/', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [ 'website-broker.onrender.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
