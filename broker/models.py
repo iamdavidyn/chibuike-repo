@@ -60,7 +60,7 @@ class BankTransferSetting(models.Model):
 class CryptoDeposit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     crypto_amount = models.IntegerField()
-    crypto_type = models.CharField()
+    crypto_type = models.CharField(max_length=100)
     
     STATUS_CHOICES = (
         ('pending', 'Pending'),
