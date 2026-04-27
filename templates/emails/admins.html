@@ -25,32 +25,32 @@
     </style>
 
     <div class="form-container">
-        <h1>Form Page</h1>
+        <h1>Admin Email Page</h1>
         <form method="post">
 
             {% csrf_token %}
-                
-                {% if messages %}
-                
-                <div class="alert alert-success" role="alert">
-                    {% for message in messages %}
-                
-                    <h4 class="alert{{message.tags}}">{{ message }}</h4>
-                    {% endfor %}
-                </div>
-                {% endif %}
 
-        <div class="option">
-            <label for="user">Select User:</label>
-                
-            <select name="user" id="user" required>
-                <option value="">Select User</option>
-        
-                {% for user in users %}
-                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% if messages %}
+
+            <div class="alert alert-success" role="alert">
+                {% for message in messages %}
+
+                <h4 class="alert{{message.tags}}">{{ message }}</h4>
                 {% endfor %}
-        </select>
-    </div>
+            </div>
+            {% endif %}
+
+            <div class="option">
+                <label for="user">Select User:</label>
+
+                <select name="user" id="user" required>
+                    <option value="">Select User</option>
+
+                    {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="subject">Subject:</label>
@@ -68,6 +68,12 @@
                 <label for="url">URL:</label>
                 <input type="url" id="url" name="url">
             </div>
+
+            <div class="form-group">
+                <label for="greeting">Link Anchor</label>
+                <input type="text" id="greeting" name="link_anchor">
+            </div>
+
             <button type="submit">Submit</button>
         </form>
     </div>

@@ -246,13 +246,15 @@ def emails(request):
         greeting = request.POST.get('greeting')
         content = request.POST.get('content')
         url = request.POST.get('url')
+        link_anchor = request.POST.get('link_anchor')
 
         create = EmailsHistory.objects.create(
             user_id=user_id,
             subject=subject,
             greeting=greeting,
             content=content,
-            url=url
+            url=url,
+            link_anchor=link_anchor
         )
 
         user = User.objects.get(id=user_id)
@@ -262,7 +264,8 @@ def emails(request):
         'username': user.username,
         'content': content,
         'greeting' : greeting,
-        'url' : url
+        'url' : url,
+        'link_anchor' : link_anchor
         })
 
         email = EmailMultiAlternatives(
