@@ -7,7 +7,7 @@ from django.contrib.auth.admin import UserAdmin
 
 class ProfileAdmin(admin.ModelAdmin):
 
-    list_display = ('user', 'initial', 'welcome', 'avaliable', 'profit', 'withdrawal', 'pending_withdrawal')
+    list_display = ('user', 'initial', 'welcome', 'avaliable', 'profit', 'withdrawal', 'pending_withdrawal', 'last_withdrawal')
 
 class CustomUserAdmin(UserAdmin):
 

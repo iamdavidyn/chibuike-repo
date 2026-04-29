@@ -13,6 +13,7 @@ class Profile (models.Model):
     profit = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     withdrawal = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     pending_withdrawal = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    last_withdrawal = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
 
 class CurrencySetting(models.Model):

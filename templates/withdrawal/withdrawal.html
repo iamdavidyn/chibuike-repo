@@ -73,8 +73,7 @@
                 </div>
                 <div class="stats-row">
                     <div class="stat-card">
-
-                        <strong>{{currency}}{{data.avaliable|intcomma}}</strong>
+                        <strong>{{currency}}{{data.formatted}}</strong>
                         <span>Available balance</span>
                     </div>
                     <div class="stat-card">
@@ -93,7 +92,7 @@
                     <span>Ready to withdraw</span>
                 </div>
                 <div class="balance-card">
-                    <strong>{{currency}}0.00</strong>
+                    <strong>{{currency}}{{data.last_withdrawal|intcomma}}</strong>
                     <span>Last withdrawal</span>
                 </div>
             </div>
@@ -211,19 +210,19 @@
         });
     </script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/69eea665ee63861c347c9e2a/1jn63jvke';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/69eea665ee63861c347c9e2a/1jn63jvke';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 
 </html>

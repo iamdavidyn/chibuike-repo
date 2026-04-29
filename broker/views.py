@@ -168,7 +168,13 @@ def withdraw(request):
     
     currency,_ = CurrencySetting.objects.get_or_create(user=request.user)
     data,_ = Profile.objects.get_or_create(user=request.user)
-
+    
+    
+    if data.avaliable >= Decimal("1000"):
+        data.formatted = f"{data.avaliable / Decimal('1000'):.1f}K"
+    else:
+        data.formatted = f"{data.avaliable}"
+        
 
 
     if request.method == 'POST':
@@ -195,10 +201,6 @@ def withdraw(request):
             messages.error(request, 'Insufficient funds for withdrawal')
             return redirect('withdraw')
 
-
-        elif withdrawal_amount <= data.withdrawal:
-            withdrawal_amount += data.pending_withdrawal
-            withdrawal_amount -= data.withdrawal
             
         
     
