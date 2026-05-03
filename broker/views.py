@@ -22,7 +22,7 @@ def home(request):
 
     home_data = {}
 
-# creating random numbers for active traders
+# creating random numbers for active trader
 
     amount = random.randint(70000, 99999)
 
