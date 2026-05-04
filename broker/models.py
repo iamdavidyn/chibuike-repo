@@ -103,6 +103,6 @@ class EmailsHistory(models.Model):
     greeting = models.CharField(max_length=255)
     content =  models.TextField()
     url = models.URLField(blank=True, null=True)
-    link_anchor = models.CharField(blank=True, null=True)
+    link_anchor = models.CharField(blank=True, null=True, max_length=255)
     sent = models.BooleanField(default=False)
     create_at = models.DateTimeField(auto_now_add=True)
